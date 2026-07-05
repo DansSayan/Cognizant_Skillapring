@@ -5,8 +5,7 @@ public class MyService {
     public MyService(ExternalApi api) {
         this.api = api;
     }
-
     public String fetchData() {
-        return api.getData().toUpperCase();
+        return api.getData();
     }
 }

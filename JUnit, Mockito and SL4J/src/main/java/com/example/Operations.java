@@ -1,24 +1,12 @@
 package com.example;
 
 public class Operations {
-    public float Division(int a, int b) {
-        if (b == 0) 
-            throw new IllegalArgumentException("Division by zero is not allowed.");
+    public int addition(int a, int b) { return a + b; }
+    public int subtraction(int a, int b) { return (a>b)? a-b : b-a; }
+    public int multiplication(int a, int b) { return a * b; }
+    public float division(int a, int b) {
+        if (b == 0)
+            throw new IllegalArgumentException("Cannot divide by zero");
         return (float) a / b;
-    }
-    public long Factorial(int n) {
-        if (n < 0) 
-            throw new IllegalArgumentException("Factorial is not defined for negative numbers.");
-        long result = 1;
-        for (int i=1 ; i<=n; i++) 
-            result *= i;
-        return result;
-    }
-    public boolean isPrime(int number) {
-        if (number <= 1) return false;
-        for (int i=2 ; i<=Math.sqrt(number) ; i++)
-            if (number%i == 0)
-                return false;
-        return true;
     }
 }
