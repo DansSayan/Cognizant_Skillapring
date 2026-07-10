@@ -2,7 +2,10 @@ package com.example;
 
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.*; 
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when; 
 
 public class OperationsTest {
     private Operations oper;
@@ -40,5 +43,23 @@ public class OperationsTest {
         int x = 5;
         int y = 0;
         oper.division(x, y);   // Act & Assert
+    }
+    @Test
+    public void testExternalApi() {
+        ExternalApi mockApi = mock(ExternalApi.class);
+        when(mockApi.getData()).thenReturn("Mock Data");
+        MyService service = new MyService(mockApi);
+        String result = service.fetchData();
+        assertEquals("Mock Data", result);
+    }
+    @Test
+    public void testVerifyInteraction() {
+        //Arrange
+        ExternalApi mockApi = mock(ExternalApi.class);
+        MyService service = new MyService(mockApi);
+        // Act
+        service.fetchData();
+        // Assert
+        verify(mockApi).getData();
     }
 }

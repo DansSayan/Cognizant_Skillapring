@@ -8,4 +8,12 @@ public class MyService {
     public String fetchData() {
         return api.getData();
     }
+    public String fetchDataSeq() {
+        String step1 = api.getData();
+        String step2 = api.getData();
+        return step1 + " & " + step2;
+    }
+    public void performAction() {
+        api.checkAccess();
+    }
 }
