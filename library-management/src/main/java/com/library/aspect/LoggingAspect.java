@@ -1,18 +1,14 @@
 package com.library.aspect;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.JoinPoint;
 
 public class LoggingAspect {
 
-    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
-        long start = System.currentTimeMillis();
+    public void logBefore(JoinPoint joinPoint) {
+        System.out.println("[AOP BEFORE] Entering method: " + joinPoint.getSignature().getName());
+    }
 
-        Object result = joinPoint.proceed(); 
-        
-        long executionTime = System.currentTimeMillis() - start; 
-
-        System.out.println("[AOP TIMER] " + joinPoint.getSignature().getName() + " executed in " + executionTime + "ms");
-        
-        return result;
+    public void logAfter(JoinPoint joinPoint) {
+        System.out.println("[AOP AFTER] Exiting method: " + joinPoint.getSignature().getName());
     }
 }

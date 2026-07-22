@@ -9,7 +9,6 @@ public class LibraryManager {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         
         BookService service = (BookService) context.getBean("bookService");
-
-        service.addBook("The Hobbit");
+        service.addBook("Head First Java");
     }
 }

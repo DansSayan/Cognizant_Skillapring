@@ -7,19 +7,25 @@
                            http://www.springframework.org/schema/aop 
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!-- Define the base beans[cite: 3] -->
     <bean id="bookRepository" class="com.library.repository.BookRepository"/>
+    
     <bean id="bookService" class="com.library.service.BookService">
         <property name="bookRepository" ref="bookRepository"/>
     </bean>
 
+    <!-- 1. Register the Aspect bean[cite: 3] -->
     <bean id="loggingAspect" class="com.library.aspect.LoggingAspect"/>
 
+    <!-- 2. Configure AOP Interceptions[cite: 3] -->
     <aop:config>
         <aop:aspect ref="loggingAspect">
-           
-            <aop:pointcut id="serviceMethods" expression="execution(* com.library.service.*.*(..))"/>
-
-            <aop:around method="logExecutionTime" pointcut-ref="serviceMethods"/>
+            <!-- Target all methods in com.library.service package[cite: 3] -->
+            <aop:pointcut id="servicePointcut" expression="execution(* com.library.service.*.*(..))"/>
+            
+            <!-- Wire Before and After advice methods[cite: 3] -->
+            <aop:before method="logBefore" pointcut-ref="servicePointcut"/>
+            <aop:after method="logAfter" pointcut-ref="servicePointcut"/>
         </aop:aspect>
     </aop:config>
 
